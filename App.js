@@ -1,14 +1,6 @@
-/**
- *   <div id = 'parent'>
- *      <div id = 'child'>
- *     <h1>this is child</h1>
- *   <h1>this is super child</h1>
- *     </div>
- *     </div>
- *
- */
-
-const heading = React.createElement("h1", { id: "heading" }, "Hello React");
+import React from "react";
+import ReactDOM from "react-dom/client";
+// const heading = React.createElement("h1", { id: "heading" }, "Hello React");
 // {} --- it will pass the attributes to the element like {id :'heading',xyz:'abc'}
 
 // console.log(heading); // it will return the object
@@ -20,12 +12,12 @@ const heading = React.createElement("h1", { id: "heading" }, "Hello React");
 
 // ReactElement(object) = HTML(Browser understand)
 
-const nestedDiv = React.createElement("div", { id: "parent" }, [
+const heading = React.createElement("div", { id: "parent" }, [
   React.createElement("div", { id: "child" }, [
     React.createElement("h1", {}, "This is child"),
     React.createElement("h2", {}, "This is superchild"),
   ]),
 ]);
-console.log(nestedDiv); // it will return the object
+console.log(heading); // it will return the object
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(nestedDiv);
+root.render(heading);
