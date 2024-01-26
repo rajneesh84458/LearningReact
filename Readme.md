@@ -17,3 +17,23 @@ Error handling
 HTTPS support
 Tree Shaking algorithm ---remove unused code
 Different build for development and production bundles
+
+// food ordering
+
+/\*\*
+
+- Header
+- Logo
+- Nav items
+- Body
+- Search
+- Restaurants container
+- RestaurantCard
+-        Image
+-         Name of the restaurant, rating, cusions, etc
+- Footer
+- Copyright
+- Links
+- Address
+- Contact
+- \*/
