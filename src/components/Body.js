@@ -1,7 +1,10 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/hooks/useOnlineStatus";
 const Body = () => {
+  const onlineStatus = useOnlineStatus();
   const [resData, setResData] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filterRestaurant, setFilterRestaurant] = useState("");
@@ -20,10 +23,6 @@ const Body = () => {
     );
 
     const result = await data.json();
-    // console.log(
-    //   "result",
-    //   result?.data.cards[4]?.card.card.gridElements.infoWithStyle.restaurants
-    // );
     setResData(
       result?.data.cards[4]?.card.card.gridElements.infoWithStyle.restaurants
     );
@@ -39,6 +38,9 @@ const Body = () => {
     );
     setFilterRestaurant(filteredRest);
   };
+
+  if (onlineStatus === false)
+    return <p>you are offline. Please check your internet connection !!</p>;
 
   // conditional rendering
   return resData?.length === 0 ? (
@@ -58,7 +60,11 @@ const Body = () => {
       </button>
       <div className="res-container">
         {filterRestaurant.map((res) => {
-          return <RestaurantCard key={res?.info.id} data={res} />;
+          return (
+            <Link key={res?.info.id} to={"/restaurantmenu/" + res?.info.id}>
+              <RestaurantCard data={res} />
+            </Link>
+          );
         })}
       </div>
     </div>

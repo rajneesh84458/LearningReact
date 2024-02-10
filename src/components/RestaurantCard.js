@@ -1,8 +1,8 @@
 import { CDN_LINK } from "../utils/constants";
 
-const RestaurantCard = (props) => {
+const RestaurantCard = ({ data }) => {
   const { name, cloudinaryImageId, avgRating, costForTwo, cuisines } =
-    props.data.info;
+    data.info;
   return (
     <div className="res-card">
       <img className="res-img" src={CDN_LINK + cloudinaryImageId} />
