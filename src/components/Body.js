@@ -46,19 +46,33 @@ const Body = () => {
   return resData?.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <input
-        type="text"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <button className="search-btn" onClick={onSearchList}>
-        Search
-      </button>
-      <button className="filter-btn" onClick={filterListOnRating}>
-        Top Rated Restaurant
-      </button>
-      <div className="res-container">
+    <div>
+      <div className="flex">
+        <div className="search m-4 p-4 ">
+          <input
+            type="text"
+            value={searchText}
+            className="border border-solid border-black mx-5"
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button
+            className="px-5 py-1 bg-green-200 rounded-lg"
+            onClick={onSearchList}
+          >
+            Search
+          </button>
+        </div>
+        <div className="search m-4 p-4">
+          <button
+            className="filter px-4 py-1 bg-green-200 rounded-lg"
+            onClick={filterListOnRating}
+          >
+            Top Rated Restaurant
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap">
         {filterRestaurant.map((res) => {
           return (
             <Link key={res?.info.id} to={"/restaurantmenu/" + res?.info.id}>
