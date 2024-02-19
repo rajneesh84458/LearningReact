@@ -1,9 +1,12 @@
-import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import RestaurantCard, { withOpenRestaurant } from "./RestaurantCard";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/hooks/useOnlineStatus";
+import { UserContext } from "../utils/context/UserContext";
 const Body = () => {
+  const RestaurantIsOpen = withOpenRestaurant(RestaurantCard);
+  const { loggedInUser, setUserName } = useContext(UserContext);
   const onlineStatus = useOnlineStatus();
   const [resData, setResData] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -29,6 +32,7 @@ const Body = () => {
     setFilterRestaurant(
       result?.data.cards[4]?.card.card.gridElements.infoWithStyle.restaurants
     );
+    console.log("resData ====", resData);
   };
 
   const onSearchList = () => {
@@ -69,6 +73,12 @@ const Body = () => {
           >
             Top Rated Restaurant
           </button>
+          <label className="mx-2">UserName : </label>
+          <input
+            className="border to-blue-200 p-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </div>
       </div>
 
@@ -76,7 +86,11 @@ const Body = () => {
         {filterRestaurant.map((res) => {
           return (
             <Link key={res?.info.id} to={"/restaurantmenu/" + res?.info.id}>
-              <RestaurantCard data={res} />
+              {res.info.isOpen ? (
+                <RestaurantIsOpen data={res} />
+              ) : (
+                <RestaurantCard data={res} />
+              )}
             </Link>
           );
         })}

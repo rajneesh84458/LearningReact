@@ -17,4 +17,19 @@ const RestaurantCard = ({ data }) => {
   );
 };
 
+// Make a HOC function to display the resturant is opened or not
+
+export const withOpenRestaurant = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className=" absolute bg-black text-white ml-8 p-1 rounded-lg">
+          Open
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 export default RestaurantCard;
